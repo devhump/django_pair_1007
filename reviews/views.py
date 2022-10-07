@@ -76,12 +76,15 @@ def delete(request, pk):
 # written by RJ
 def find(request):
     search = request.GET.get('search')
-    reviews = Reviews.objects.all()
-    if reviews.exists():
-        review = Reviews.objects.get(title=search)
-        return redirect('reviews:detail', reviews.pk)
+    print(search)
+    print('왜 안되?')
+
+    if Reviews.objects.filter(movie_name=search).exists():
+        
+        review = Reviews.objects.get(movie_name=search)
+        return redirect('reviews:detail', review.pk)
     else:
-        return render(request, 'reviews/notfind.html')
+        return render(request, 'reviews/not_find.html')
 
 
 # written by sb
