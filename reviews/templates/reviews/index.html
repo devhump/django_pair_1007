@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>
+    This is index page
+  </h1>
+
+  <div class="container">
+    {% for review in reviews %}
+
+      <a href={% url 'reviews:detail' review.pk %}>
+        <h3>{{ review.title }}</h3>
+      </a>
+      <p>{{ review.movie_name }}</p>
+
+      <hr>
+    {% endfor %}
+
+    <a href="{% url 'reviews:create' %}">
+      <button>새글 생성</button>
+    </a>
+
+  </div>
+{% endblock %}

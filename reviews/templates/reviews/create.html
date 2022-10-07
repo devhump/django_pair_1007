@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>create</h1>
+
+  <form action="{% url 'reviews:create' %}" method="POST">
+
+    {% csrf_token %}
+    {{ reviews_form.as_p  }}
+
+    <a href="{% url 'reviews:index' %}">
+      <button>저장</button>
+    </a>
+
+  </form>
+
+{% endblock %}
