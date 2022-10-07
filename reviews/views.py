@@ -74,30 +74,26 @@ def delete(request, pk):
 
     return redirect("reviews:index")
 
-# def find(request):
-#     search = request.GET.get('search')
-#     movie_name = Reviews.objects.filter(movie_name=search)
-#     context = {
-#         'search': search,
-#     }
-#     return redirect('reviews:index', context)
 
+# written by RJ
 def find(request):
     search = request.GET.get('search')
-    reviews = Reviews.objects.all()
-    if reviews.exists():
-        review = Reviews.objects.get(title=search)
-        return redirect('reviews:detail', reviews.pk)
+
+    if Reviews.objects.filter(movie_name=search).exists():
+        # print('존재함1')
+        review = Reviews.objects.get(movie_name=search)
+        return redirect('reviews:detail', review.pk)
     else:
-        return render(request, 'reviews/notfind.html')
+        return redirect('reviews:notfind')
+
+# written by sb
+# def search(request):
+#     if request.method == "POST":
+#         searched = request.POST["search"]
+#         movie_name = Reviews.objects.filter(movie_name=searched)[0].movie_name
+#         correctPK = Reviews.objects.filter(movie_name=movie_name).values("pk")[0]["pk"]
+#     return redirect("reviews:detail", correctPK)
 
 def notfind(request):
     return render(request, 'reviews/not_find.html')
 
-# def find(request):
-#     if request.method == 'POST':
-#             searched = request.POST['searched']
-#             recipes = Reviews.objects.filter(name__contains=searched)
-#             return render(request, 'searched.html', {'searched': searched, 'recipes': recipes})
-#     else:
-#             return render(request, 'searched.html', {})
