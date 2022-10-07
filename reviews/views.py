@@ -1,7 +1,7 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from reviews.forms import ReviewsForm
 from .models import Reviews
+
 
 # Create your views here.
 def home(request):
@@ -9,15 +9,12 @@ def home(request):
 
 
 def index(request):
-
     reviews = Reviews.objects.all()
 
     context = {
         "reviews": reviews,
     }
-
     return render(request, "reviews/index.html", context)
-
 
 def create(request):
 
@@ -75,16 +72,17 @@ def delete(request, pk):
     return redirect("reviews:index")
 
 
+
 # written by RJ
 def find(request):
     search = request.GET.get('search')
-
-    if Reviews.objects.filter(movie_name=search).exists():
-        # print('존재함1')
-        review = Reviews.objects.get(movie_name=search)
-        return redirect('reviews:detail', review.pk)
+    reviews = Reviews.objects.all()
+    if reviews.exists():
+        review = Reviews.objects.get(title=search)
+        return redirect('reviews:detail', reviews.pk)
     else:
-        return redirect('reviews:notfind')
+        return render(request, 'reviews/notfind.html')
+
 
 # written by sb
 # def search(request):
@@ -93,7 +91,3 @@ def find(request):
 #         movie_name = Reviews.objects.filter(movie_name=searched)[0].movie_name
 #         correctPK = Reviews.objects.filter(movie_name=movie_name).values("pk")[0]["pk"]
 #     return redirect("reviews:detail", correctPK)
-
-def notfind(request):
-    return render(request, 'reviews/not_find.html')
-

@@ -10,6 +10,5 @@ urlpatterns = [
     path("<int:pk>/", views.detail, name="detail"),
     path("<int:pk>/update", views.update, name="update"),
     path("<int:pk>/delete", views.delete, name="delete"),
-    path('find/', views.find, name="find"),
-    path('notfind/', views.notfind, name="notfind"),
+    path("search/", views.search, name="search"),
 ]
