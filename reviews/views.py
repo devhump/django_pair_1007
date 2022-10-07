@@ -1,7 +1,7 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from reviews.forms import ReviewsForm
 from .models import Reviews
+
 
 # Create your views here.
 def home(request):
@@ -73,3 +73,16 @@ def delete(request, pk):
     review.delete()
 
     return redirect("reviews:index")
+
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST["search"]
+        movie_name = Reviews.objects.filter(movie_name=searched)
+
+        context = {
+            "movie_name": movie_name[0].movie_name,
+        }
+
+        print(movie_name)
+    return render(request, "reviews/home.html", context)
