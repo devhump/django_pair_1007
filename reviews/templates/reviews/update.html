@@ -1,12 +1,13 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<!--  -->
+{% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
 
-{% block content %}
+<div class="container">
+  <h1 class="my-5 text-center">게시글을 수정해주세요</h1>
+  <form class="mb-5" action="" method="POST">
+    {% csrf_token %} {% bootstrap_form reviews_form %}
 
-  <form action="" method="POST">
-
-    {% csrf_token %}
-    {{ reviews_form.as_p }}
-
-    <input type='submit' value="저장">
+    <input type="submit" value="저장" class="btn btn-dark" />
   </form>
+</div>
 {% endblock %}

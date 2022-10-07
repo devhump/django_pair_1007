@@ -1,18 +1,16 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<!--  -->
+{% load django_bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+<div class="container">
+  <h1 class="my-5 text-center">게시글을 작성해주세요</h1>
 
-{% block content %}
-
-  <h1>create</h1>
-
-  <form action="{% url 'reviews:create' %}" method="POST">
-
-    {% csrf_token %}
-    {{ reviews_form.as_p  }}
+  <form class="mb-5" action="{% url 'reviews:create' %}" method="POST">
+    {% csrf_token %} {% bootstrap_form reviews_form %}
 
     <a href="{% url 'reviews:index' %}">
-      <button>저장</button>
+      <button class="btn btn-dark">저장</button>
     </a>
-
   </form>
+</div>
 
 {% endblock %}

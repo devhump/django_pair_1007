@@ -1,24 +1,31 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<h1 class="my-5 text-center">게시판</h1>
 
-{% block content %}
-  <h1>
-    This is index page
-  </h1>
+<div class="container">
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col-lg-3">영화 이름</th>
+        <th scope="col-lg-9">리뷰 제목</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for review in reviews %}
+      <tr>
+        <th scope="row">{{ review.movie_name }}</th>
+        <td>
+          <a href="{% url 'reviews:detail' review.pk %}">{{ review.title }}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-  <div class="container">
-    {% for review in reviews %}
-
-      <a href={% url 'reviews:detail' review.pk %}>
-        <h3>{{ review.title }}</h3>
-      </a>
-      <p>{{ review.movie_name }}</p>
-
-      <hr>
-    {% endfor %}
-
-    <a href="{% url 'reviews:create' %}">
-      <button>새글 생성</button>
-    </a>
-
-  </div>
+  <a
+    class="d-flex justify-content-end text-decoration-none"
+    href="{% url 'reviews:create' %}"
+  >
+    <button class="btn btn-dark">새글 생성</button>
+  </a>
+</div>
 {% endblock %}
