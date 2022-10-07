@@ -1,37 +1,29 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container">
-  <div class="card my-5 p-2" style="width: 100%; height: 100%">
-    <div class="card-body">
-      <h5 class="card-title fs-2">{{ review.title }}</h5>
-      <div class="fs-4">
-        <span class="card-subtitle mb-2 me-2">{{ review.movie_name }}</span>
-        <span>{{ review.grade }}점</span>
-      </div>
-      <div class="d-flex justify-content-end">
-        <span class="card-subtitle text-muted"
-          >{{ review.created_at | date:"y년 m월 d일"}}</span
-        >
-        <span class="card-subtitle text-muted mx-1">/</span>
-        <span class="card-subtitle text-muted"
-          >{{ review.updated_at | date:"y년 m월 d일"}}</span
-        >
-      </div>
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="card my-5 p-2" style="width: 100%; height: 100%">
+      <div class="card-body">
+        <h5 class="card-title fs-2">{{ review.title }}</h5>
+        <div class="fs-4">
+          <span class="card-subtitle mb-2 me-2">{{ review.movie_name }}</span>
+          <span>{{ review.grade }}점</span>
+        </div>
+        <div class="d-flex justify-content-end">
+          <span class="card-subtitle text-muted">{{ review.created_at | date:"y년 m월 d일"}}</span>
+          <span class="card-subtitle text-muted mx-1">/</span>
+          <span class="card-subtitle text-muted">{{ review.updated_at | date:"y년 m월 d일"}}</span>
+        </div>
 
-      <p class="card-text my-3">{{ review.content }}</p>
-      <div class="d-flex justify-content-end">
-        <a
-          href="{% url 'reviews:update' review.pk %}"
-          class="btn btn-outline-success me-3"
-          >수정</a
-        >
-        <a
-          href="{% url 'reviews:delete' review.pk %}"
-          class="btn btn-outline-danger"
-          >삭제</a
-        >
+        <p class="card-text my-3">{{ review.content }}</p>
+        <div class="d-flex justify-content-end">
+          <a href="{% url 'reviews:update' review.pk %}" class="btn btn-outline-success me-3">수정</a>
+          <form action="{% url 'reviews:delete' review.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="삭제" class="btn btn-outline-danger me-3">
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 {% endblock %}

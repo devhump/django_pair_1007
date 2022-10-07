@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="d-flex justify-content-center" style="margin-top: 19rem">
-    <p class="fs-1 fw-bold">어서오세요</p>
-
-    <form action="{% url 'reviews:find' %}">
-      <input type="text" name="search">
-      <input type="submit">
-    </form>
-
+    <div class="flex-column">
+      <p class="fs-1 fw-bold">어서오세요</p>
+      <form action="{% url 'reviews:find' %}">
+        <input type="text" name="search"/>
+        <input type="submit" class="btn btn-dark">
+      </form>
+      <p class="mt-3">찾으시는 영화 제목을 적어주세요!!</p>
+    </div>
   </div>
 {% endblock %}

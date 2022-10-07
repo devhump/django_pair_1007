@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>
-    Page Not Found 404
-  </h1>
+  {% load static %}
+  <div class="d-flex justify-content-center" style="margin-top:19rem">
+    <div class="flex-column align-content-center text-center">
+      <h1>
+        찾으시는 결과가 없습니다ㅠㅠ
+      </h1>
+      <img src="{% static 'images/bonobono404.png' %}" alt="">
+      <div>
+        <a href="{% url 'reviews:home' %}" class="btn btn-dark">돌아가기</a>
+      </div>
+    </div>
+  </div>
 {% endblock %}

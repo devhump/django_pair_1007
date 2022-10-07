@@ -65,19 +65,18 @@ def update(request, pk):
 
 # get으로 구현, post로 변경 필요
 def delete(request, pk):
-
     review = Reviews.objects.get(pk=pk)
-    review.delete()
-
-    return redirect("reviews:index")
+    if request.method == "POST":
+        review.delete()
+        return redirect("reviews:index")
+    else:
+        return redirect('reviews:detail')
 
 
 
 # written by RJ
 def find(request):
     search = request.GET.get('search')
-    print(search)
-    print('왜 안되?')
 
     if Reviews.objects.filter(movie_name=search).exists():
         
